@@ -56,7 +56,3 @@ Credits:
 [https://pypi.org/project/pytrends/](https://pypi.org/project/pytrends/)
 
 [https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177](https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTM5Mjg4MjcsMjE1NDgyNzcsLTE3MT
-k4ODgyOThdfQ==
--->
