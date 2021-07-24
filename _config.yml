@@ -32,11 +32,7 @@ projects:
 topics:
   - name: Visualization
     web_url: https://public.tableau.com/profile/hui.wang1742#!/
-    image_url: https://www.lib.washington.edu/dataservices/images/Tableau_Software_logo.png
-
-  - name: ETL
-    web_url: https://github.com/pawl/awesome-etl
-    image_url: https://blog.bismart.com/hubfs/Imported_Blog_Media/ETL/20190604_imagen2.jpg
+    image_url: https://pbs.twimg.com/profile_images/1268207088683020288/d9agkn4h_400x400.jpg
 
 social_media:
   # behance: your_username
