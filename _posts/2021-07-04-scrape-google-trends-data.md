@@ -1,5 +1,5 @@
 ---
-title: "Scrape Google Trends Data"
+title: Scrape Google Trends Data
 published: true
 ---
 Google Trends is a website that how frequently a given search term is entered into Google’s search engine relative to the site’s total search volume over a given period of time. From Google Trends, you can find the search trend of certain keywords on google. You can also compare the search trends of up to five keywords. For example, below compare five keywords search trend.
@@ -10,14 +10,15 @@ However, the provided visualizations might not satisfy your particular needs. If
 
 Below is the code to scrape the search trend of keywords "dress" and "pants" from Jan 1, 2020 to Jan 10 2020 at British Columbia, Canada.
 
+```python
     from pytrends.request import TrendReq
     import pandas as pd
     import time
     pytrend \= TrendReq(hl\='en-GB', tz\=360)
-    
+
     keywords\=\['dress','pants'\]
     dataset \= \[\]
-    
+
     for x in range(0,len(keywords)):
          keyword \= \[keywords\[x\]\]
          pytrend.build\_payload(
@@ -29,9 +30,10 @@ Below is the code to scrape the search trend of keywords "dress" and "pants" fro
      if not data.empty:
               data \= data.drop(labels\=\['isPartial'\],axis\='columns')   \# thhis 
               dataset.append(data)
-     
+
     result \= pd.concat(dataset, axis\=1)   \# merge the dataset using first column as reference
     print(result) 
+```
 
 The result is:
 
