@@ -20,67 +20,67 @@ The creds authorization is complicated. I followed the steps, but the script doe
 Finally, here is my sample script to allow both read and write into a Google Sheet file.
 
 ```python
-from \_\_future\_\_ import print\_function
+
+from __future__ import print_function
 import os.path
 from googleapiclient.discovery import build
-from google\_auth\_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from google.oauth2 import service\_account
+from google.oauth2 import service_account
 import json
 from datetime import datetime
 
-\# if you want this script to read Google Sheet files only, use : SCOPES \= \['https://www.googleapis.com/auth/spreadsheets.readonly'\]
-SCOPES \= \['https://www.googleapis.com/auth/spreadsheets'\]
+# if you want this script to read Google Sheet files only, use : SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-\# the ID and range of a Gogole Sheet spreadsheet
-\# if there are more than one tabs in the speadsheet, specific the tab in front of the range 
-SAMPLE\_SPREADSHEET\_ID \= 'XXXXXXXXXXXX'
-SAMPLE\_RANGE\_NAME \= 'A1:AE400'
+# the ID and range of a Gogole Sheet spreadsheet
+# if there are more than one tabs in the speadsheet, specific the tab in front of the range 
+SAMPLE_SPREADSHEET_ID = 'XXXXXXXXXXXX'
+SAMPLE_RANGE_NAME = 'A1:AE400'
 
-\# create a funtion to transfer json file content into a format used for Google Sheet file udpdate
-def convert\_json\_to\_googlesheets(json\_object):
- number\_row \= 1
- values \= \[\["date", "realestate", "mortgagerate", "interestrate", "location"\]\]
-\# for row in json\_object:
- for attribute, value in json\_object.items():
+# create a funtion to transfer json file content into a format used for Google Sheet file udpdate
+def convert_json_to_googlesheets(json_object):
+    number_row = 1
+    values = [["date", "realestate", "mortgagerate", "interestrate", "location"]]
+# for row in json_object:
+ for attribute, value in json_object.items():
  print(attribute)
- values.append(\[
- value\["date"\],
- value\["realestate"\],
- value\["mortgagerate"\],
- value\["interestrate"\],
- value\["location"\]
- \])
- number\_row \= number\_row + 1
+        values.append([
+            value["date"],
+            value["realestate"],
+            value["mortgagerate"],
+            value["interestrate"],
+            value["location"]
+        ])
+        number_row = number_row + 1
 
- body \= {
+    body = {
  'values': values,
- }
+    }
  return body
 
 def main():
  # put full path of the json file downloaded during creating Key ID
- credentials \= service\_account.Credentials.from\_service\_account\_file("C:\\\\XXXXXXXX.json", scopes\=SCOPES)
- service \= build('sheets', 'v4', credentials\=credentials)
+    credentials = service_account.Credentials.from_service_account_file("C:\\XXXXXXXX.json", scopes=SCOPES)
+    service = build('sheets', 'v4', credentials=credentials)
 
- # Call the Sheets API
- sheet \= service.spreadsheets()
- result \= sheet.values().get(spreadsheetId\=SAMPLE\_SPREADSHEET\_ID,
- range\=SAMPLE\_RANGE\_NAME).execute()
- values \= result.get('values', \[\])
+ # call the sheets API
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+ range=SAMPLE_RANGE_NAME).execute()
+    values = result.get('values', [])
  # print(values)
  # delete the old content inside the spreadsheet
- request\=sheet.values().clear(spreadsheetId\=SAMPLE\_SPREADSHEET\_ID, range\=SAMPLE\_RANGE\_NAME).execute()
+    request=sheet.values().clear(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME).execute()
  
  # copy content from a json file, transfer its format, and use it to update the speadsheet
- f\=open("C://Users/17789/Documents/Mentorship/GoogleTrendBC/GoogleTrend\_60\_months.json",)
- json\_object \= json.load(f) 
- body \= convert\_json\_to\_googlesheets(json\_object)
- res\=sheet.values().update(spreadsheetId\=SAMPLE\_SPREADSHEET\_ID, valueInputOption\='USER\_ENTERED', body\=body, range\=SAMPLE\_RANGE\_NAME).execute()
+    f=open("C://Users/17789/Documents/Mentorship/GoogleTrendBC/GoogleTrend_60_months.json",)
+    json_object = json.load(f)   
+    body = convert_json_to_googlesheets(json_object)
+    res=sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,   valueInputOption='USER_ENTERED', body=body, range=SAMPLE_RANGE_NAME).execute()
 
-if \_\_name\_\_ \== '\_\_main\_\_':
- main()
- 
+if __name__ == '__main__':
+    main()
      print(result) 
 ```
