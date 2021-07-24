@@ -10,28 +10,28 @@ However, the provided visualizations might not satisfy your particular needs. If
 
 Below is the code to scrape the search trend of keywords "dress" and "pants" from Jan 1, 2020 to Jan 10 2020 at British Columbia, Canada.
 
-from pytrends.request import TrendReq
-import pandas as pd
-import time
-pytrend \= TrendReq(hl\='en-GB', tz\=360)
-
-keywords\=\['dress','pants'\]
-dataset \= \[\]
-
-for x in range(0,len(keywords)):
-     keyword \= \[keywords\[x\]\]
-     pytrend.build\_payload(
- kw\_list\=keyword,
- cat\=0,
- timeframe\='2020-01-01 2020-01-10',
- geo\='CA-BC')
-     data \= pytrend.interest\_over\_time()
- if not data.empty:
-          data \= data.drop(labels\=\['isPartial'\],axis\='columns')   \# thhis 
-          dataset.append(data)
- 
-result \= pd.concat(dataset, axis\=1)   \# merge the dataset using first column as reference
-print(result) 
+    from pytrends.request import TrendReq
+    import pandas as pd
+    import time
+    pytrend \= TrendReq(hl\='en-GB', tz\=360)
+    
+    keywords\=\['dress','pants'\]
+    dataset \= \[\]
+    
+    for x in range(0,len(keywords)):
+         keyword \= \[keywords\[x\]\]
+         pytrend.build\_payload(
+     kw\_list\=keyword,
+     cat\=0,
+     timeframe\='2020-01-01 2020-01-10',
+     geo\='CA-BC')
+         data \= pytrend.interest\_over\_time()
+     if not data.empty:
+              data \= data.drop(labels\=\['isPartial'\],axis\='columns')   \# thhis 
+              dataset.append(data)
+     
+    result \= pd.concat(dataset, axis\=1)   \# merge the dataset using first column as reference
+    print(result) 
 
 The result is:
 
@@ -55,6 +55,6 @@ Credits:
 
 [https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177](https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTg2NzQyNzQ0LDIxNTQ4Mjc3LC0xNzE5OD
+eyJoaXN0b3J5IjpbOTE2MzA1MjQwLDIxNTQ4Mjc3LC0xNzE5OD
 g4Mjk4XX0=
 -->
