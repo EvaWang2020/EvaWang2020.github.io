@@ -27,7 +27,9 @@ projects:
   exclude:
     archived: false
     forks: true
-    projects:
+    projects: 
+      - EvaWang2020
+      - EvaWang2020.github.io
     # - repo-name
 
 
