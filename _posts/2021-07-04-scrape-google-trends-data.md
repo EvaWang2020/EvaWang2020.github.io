@@ -11,28 +11,28 @@ However, the provided visualizations might not satisfy your particular needs. If
 Below is the code to scrape the search trend of keywords "dress" and "pants" from Jan 1, 2020 to Jan 10 2020 at British Columbia, Canada.
 
 ```python
-    from pytrends.request import TrendReq
-    import pandas as pd
-    import time
-    pytrend \= TrendReq(hl\='en-GB', tz\=360)
+from pytrends.request import TrendReq
+import pandas as pd
+import time
+pytrend = TrendReq(hl='en-GB', tz=360)
 
-    keywords\=\['dress','pants'\]
-    dataset \= \[\]
+keywords=['dress','pants']
+dataset = []
 
-    for x in range(0,len(keywords)):
-         keyword \= \[keywords\[x\]\]
-         pytrend.build\_payload(
-     kw\_list\=keyword,
-     cat\=0,
-     timeframe\='2020-01-01 2020-01-10',
-     geo\='CA-BC')
-         data \= pytrend.interest\_over\_time()
-     if not data.empty:
-              data \= data.drop(labels\=\['isPartial'\],axis\='columns')   \# thhis 
-              dataset.append(data)
-
-    result \= pd.concat(dataset, axis\=1)   \# merge the dataset using first column as reference
-    print(result) 
+for x in range(0,len(keywords)):
+     keyword = [keywords[x]]
+     pytrend.build_payload(
+kw_list=keyword,
+cat=0,
+timeframe='2020-01-01 2020-01-10',
+geo='CA-BC')
+     data = pytrend.interest_over_time()
+if not data.empty:
+        data = data.drop(labels=['isPartial'],axis='columns')   # thhis 
+        dataset.append(data)
+ 
+result = pd.concat(dataset, axis=1)   # merge the dataset using first column as reference
+print(result) 
 ```
 
 The result is:
@@ -43,12 +43,13 @@ Do you understand what the result means? The numbers represents the search inter
 
 We can also search the popularity of a term by region within a specific period. Below is an example to find the search trend for the keyword "yoga pants" from Jan 1, 2016 to Feb 2, 2021 in Canada.
 
- from pytrends.request import TrendReq
-pytrend \= TrendReq()
-pytrend.build\_payload(kw\_list\=\['yoga pants'\], timeframe\='2016-01-01 2021-07-02', geo\='CA')
-df \= pytrend.interest\_by\_region()
-df.reset\_index().plot(x\='geoName', y\='yoga pants', figsize\=(8, 5), kind \='bar')
-
+```python
+from pytrends.request import TrendReq
+pytrend = TrendReq()
+pytrend.build_payload(kw_list=['yoga pants'], timeframe='2016-01-01 2021-07-02', geo='CA')
+df = pytrend.interest_by_region()
+df.reset_index().plot(x='geoName', y='yoga pants', figsize=(8, 5), kind ='bar')
+```
 ![](https://static.wixstatic.com/media/456b92_cf86036c97ea4726bb80b8effcbc7565~mv2.png/v1/fill/w_360,h_490,al_c,q_95/456b92_cf86036c97ea4726bb80b8effcbc7565~mv2.webp)
 
 Credits:
