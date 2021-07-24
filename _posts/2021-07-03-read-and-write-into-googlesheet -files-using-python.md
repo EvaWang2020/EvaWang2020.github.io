@@ -20,7 +20,6 @@ The creds authorization is complicated. I followed the steps, but the script doe
 Finally, here is my sample script to allow both read and write into a Google Sheet file.
 
 ```python
-
 from __future__ import print_function
 import os.path
 from googleapiclient.discovery import build
@@ -34,7 +33,7 @@ from datetime import datetime
 # if you want this script to read Google Sheet files only, use : SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-# the ID and range of a Gogole Sheet spreadsheet
+# the ID and range of a Google Sheet spreadsheet
 # if there are more than one tabs in the speadsheet, specific the tab in front of the range 
 SAMPLE_SPREADSHEET_ID = 'XXXXXXXXXXXX'
 SAMPLE_RANGE_NAME = 'A1:AE400'
@@ -44,21 +43,21 @@ def convert_json_to_googlesheets(json_object):
     number_row = 1
     values = [["date", "realestate", "mortgagerate", "interestrate", "location"]]
 # for row in json_object:
- for attribute, value in json_object.items():
- print(attribute)
+    for attribute, value in json_object.items():
+        print(attribute)
         values.append([
-            value["date"],
-            value["realestate"],
-            value["mortgagerate"],
-            value["interestrate"],
-            value["location"]
-        ])
+        value["date"],
+        value["realestate"],
+        value["mortgagerate"],
+        value["interestrate"],
+        value["location"]
+            ])
         number_row = number_row + 1
 
     body = {
- 'values': values,
+'values': values,
     }
- return body
+    return body
 
 def main():
  # put full path of the json file downloaded during creating Key ID
@@ -82,5 +81,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-     print(result) 
+ 
+
 ```
