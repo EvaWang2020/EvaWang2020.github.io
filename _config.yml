@@ -1,0 +1,57 @@
+layout: sidebar
+style: dark
+
+plugins:
+  - jekyll-octicons
+  - jekyll-github-metadata
+  - jemoji
+
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts"
+    values:
+      layout: "post"
+
+projects:
+  sort_by: pushed
+  # sort_by options:
+  #   - pushed
+  #   - stars
+  limit: 9
+  exclude:
+    archived: false
+    forks: true
+    projects:
+    # - repo-name
+
+
+topics:
+  - name: Visualization
+    web_url: https://public.tableau.com/profile/hui.wang1742#!/
+    image_url: https://www.lib.washington.edu/dataservices/images/Tableau_Software_logo.png
+
+  - name: ETL
+    web_url: https://github.com/pawl/awesome-etl
+    image_url: https://blog.bismart.com/hubfs/Imported_Blog_Media/ETL/20190604_imagen2.jpg
+
+social_media:
+  # behance: your_username
+  # dribbble: your_username
+  # facebook: your_username
+  # hackerrank: your_username
+  # instagram: your_username
+  # keybase: your_username
+  linkedin: eva-wang-3141527a
+  # mastodon: your_username
+  # medium: your_username
+  # stackoverflow: your_user_id
+  # telegram: your_username
+  # twitter: your_username
+  # unsplash: your_username
+  # vk: your_username
+  website: https://evaanalytics.wixsite.com/website
+  youtube: channel/UCRBm41yd9QBlsZI76vwleYQ
