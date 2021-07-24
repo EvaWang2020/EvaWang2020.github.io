@@ -88,72 +88,72 @@ I feel Scrapy ( a free and open-source web-crawling framework written in Python)
 
 Below is an example of scaping the same content like the above. The result is saved into a JSON file. Here we target to scrape the whole Vancouver list on Jul 4, 2021. It took 6 mins 5 seconds to finish. As there are 167 pages, it took 2.16 seconds on average to scrape one page, while Beautiful Soup took 20 seconds to scrape one page.
 
-import scrapy
-from scrapy.crawler import CrawlerProcess
-from ratelimiter import RateLimiter
-from scrapy.signalmanager import dispatcher
-from scrapy import signals
-import json
-import os.path
-from datetime import date
-
-# this mean to call 10 pages per 5 seconds. If scraping too fast, it could be blocked. Also, some lists might be skipped when scrapping too fast 
-rate\_limiter \= RateLimiter(max\_calls\=10, period\=5)
-results \= \[\]
-date \= date.today()
-# change path1 text according to your need."xxxxxxx" has to be replaced
-path1 \= "C://xxxxxxx\_"
-path2 \= str(date)+"-1.txt"
-file\_path \= path1+path2
-
-if os.path.isfile(file\_path):
-    os.remove(file\_path)
-    file\_object \= open(file\_path, "w+")
-    file\_object.close()
-else:
-    pass
-
-# create a class inherited from another class scrapy.Spider
-class BlogSpider(scrapy.Spider):
-    name \= 'blogspider'
-# this is the starting URL
-    start\_urls \= \['https://www.findvancouverhouses.com/search/quick?city=Vancouver&page=1'\]
-
- def parse(self, response):
-# print(response.text)
-# reponse is the scraped result
- for title in response.css('.card--list-wrap'):
- yield {
-# depending on what you want to collect, the detail is different
- 'price': title.css('.card--list-header::text').get().strip(),
- 'address': title.css('.full-address').get().strip(),
- 'Structure & size': title.css('.card--list stats').xpath('ul/li/text()').getall()
-            }   # yield is used to return the result
-
- for next\_page in response.css('a\[class="old-school"\]'):
- with rate\_limiter:
-# this is to ask to go through the pages
- yield response.follow(next\_page, self.parse)
-
-# below is a function to call after spider find content
-def crawler\_results(signal, sender, item, response, spider):
-    results.append(item)   # item is the scraped result from yield
-
-dispatcher.connect(crawler\_results, signal\=signals.item\_passed)
-process \= CrawlerProcess({
- 'USER\_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_15\_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
-
-})   # a user agent is any software, acting on behalf of a user, which "retrieves, renders and facilitates end\-user interaction with Web content. Sometimes you need to change it to avoid banning from your scrapying websites
-
-process.crawl(BlogSpider)
-process.start()
-
-json\_result \= {
- 'listings': results
-}
-# to create called sample .'a' means to append content
-with open(file\_path, 'a') as outfile:
-    outfile.write(json.dumps(json\_result) + '\\n')
+    import scrapy
+    from scrapy.crawler import CrawlerProcess
+    from ratelimiter import RateLimiter
+    from scrapy.signalmanager import dispatcher
+    from scrapy import signals
+    import json
+    import os.path
+    from datetime import date
+    
+    # this mean to call 10 pages per 5 seconds. If scraping too fast, it could be blocked. Also, some lists might be skipped when scrapping too fast 
+    rate\_limiter \= RateLimiter(max\_calls\=10, period\=5)
+    results \= \[\]
+    date \= date.today()
+    # change path1 text according to your need."xxxxxxx" has to be replaced
+    path1 \= "C://xxxxxxx\_"
+    path2 \= str(date)+"-1.txt"
+    file\_path \= path1+path2
+    
+    if os.path.isfile(file\_path):
+        os.remove(file\_path)
+        file\_object \= open(file\_path, "w+")
+        file\_object.close()
+    else:
+        pass
+    
+    # create a class inherited from another class scrapy.Spider
+    class BlogSpider(scrapy.Spider):
+        name \= 'blogspider'
+    # this is the starting URL
+        start\_urls \= \['https://www.findvancouverhouses.com/search/quick?city=Vancouver&page=1'\]
+    
+     def parse(self, response):
+    # print(response.text)
+    # reponse is the scraped result
+     for title in response.css('.card--list-wrap'):
+     yield {
+    # depending on what you want to collect, the detail is different
+     'price': title.css('.card--list-header::text').get().strip(),
+     'address': title.css('.full-address').get().strip(),
+     'Structure & size': title.css('.card--list stats').xpath('ul/li/text()').getall()
+                }   # yield is used to return the result
+    
+     for next\_page in response.css('a\[class="old-school"\]'):
+     with rate\_limiter:
+    # this is to ask to go through the pages
+     yield response.follow(next\_page, self.parse)
+    
+    # below is a function to call after spider find content
+    def crawler\_results(signal, sender, item, response, spider):
+        results.append(item)   # item is the scraped result from yield
+    
+    dispatcher.connect(crawler\_results, signal\=signals.item\_passed)
+    process \= CrawlerProcess({
+     'USER\_AGENT': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_15\_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
+    
+    })   # a user agent is any software, acting on behalf of a user, which "retrieves, renders and facilitates end\-user interaction with Web content. Sometimes you need to change it to avoid banning from your scrapying websites
+    
+    process.crawl(BlogSpider)
+    process.start()
+    
+    json\_result \= {
+     'listings': results
+    }
+    # to create called sample .'a' means to append content
+    with open(file\_path, 'a') as outfile:
+        outfile.write(json.dumps(json\_result) + '\\n')
 
 When using Scrapy, often you get the error indicating your call is blocked. The common reason is that your code is asking too much content in a short period, so the website detects you and therefore blocks you. What you can do is that you limit the scrapping speed. Also, you might get the error "ReactorNotRestartable." There could be many reasons. I solved it by closing/restarting my Visual Studio.
 
@@ -165,5 +165,5 @@ One good thing about using Scrapy is that you can run multiple spiders simultane
 
 Notice: the article is for learning purposes. Please check the website's privacy and terms when practicing scraping. I encourage you to also check the legal issue related to web scraping to avoid unethical usage of scraped data.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMzcyNTU1LC0xNzE5ODg4Mjk4XX0=
+eyJoaXN0b3J5IjpbMjE1NDgyNzcsLTE3MTk4ODgyOThdfQ==
 -->
