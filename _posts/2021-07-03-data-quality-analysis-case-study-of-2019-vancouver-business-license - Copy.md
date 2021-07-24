@@ -90,7 +90,7 @@ To verify this assumption, I drilled through the IssuedDate column and found tha
 
 ![](https://static.wixstatic.com/media/456b92_79332146ccf54177bc58400594efb198~mv2.png/v1/fill/w_360,h_209,al_c,q_95/456b92_79332146ccf54177bc58400594efb198~mv2.webp)
 
--   **PostalCode: Various Patterns**
+**PostalCode: Various Patterns**
     
 
 From Mask analysis, I found that there are many different types of postal code patterns.
@@ -105,7 +105,7 @@ To further investigating where these postal codes below to geographically, I wen
 
 ![](https://static.wixstatic.com/media/456b92_c6b15df27c974c2c9171f36bdc7e3961~mv2.png/v1/fill/w_360,h_154,al_c,lg_1,q_95/456b92_c6b15df27c974c2c9171f36bdc7e3961~mv2.webp)
 
--   **Street: Empty Value**
+**Street: Empty Value**
     
 
 In the Street column, I found that around 46% of records have no value. We might think that street input is not mandatory before the license gets issued.
@@ -122,22 +122,22 @@ Further analyzing the street column, I found below the top 5 business types that
 
 ## **SME Review of Initial Assessment**
 
--   **LicenceRSN: Non-Unique Primary Key**
+**LicenceRSN: Non-Unique Primary Key**
     
 
 My SME thinks that the non-unique value issue in LicenceRSN column is not very significant as there is only 0.01% of records having non-unique values.
 
--   **BusinessName: Missing Business Name**
+**BusinessName: Missing Business Name**
     
 
 My SME thinks that missing a business name is a significant issue. Though the percentage of missing business name, which is 9%, is not surprisingly high, this is still a big issue. “This is not an era of pen and paper. The dataset should not have such imperfection”, he said. He believed that recent year business registration must have a business name. He suggested investigating the potential reason for missing the business name. “Is it because the license is expired, the LicenceRevisionNumber column did not record changes properly?”, he asked?
 
--   **Status: Issued Date and “Pending” Status Co-Existence**
+**Status: Issued Date and “Pending” Status Co-Existence**
     
 
 My SME thinks that this issue is significant. Although there are 2.7% of records having both a “Pending” status and an issued date, the issue is significant as it is very confusing. “The business might be renewing their license, which caused the pending status”, he said. He suggested checking the LicenceRevisionNumber column to see whether there was an update.
 
--   **PostalCode: Various Patterns**
+**PostalCode: Various Patterns**
     
 
 My SME thinks that the significance of this issue is low. Though there are many types of patterns, most patterns have a low frequency. For example, the pattern “LDLDLD” only appears in 0.51% of records. Other Patterns such as “LDL DLD” and “LDL DLL” appear less than 0.1% of times. Besides, the pattern “LDLDLD” and “LDL DLD” can be easily converted into the correct pattern format “LDL DLD”.
@@ -149,7 +149,7 @@ My SME thinks that this issue is significant. He said, “Around half of the reg
 
 ## **Further Research for the SME**
 
--   **BusinessName: Missing Business Name**
+**BusinessName: Missing Business Name**
     
 
 To further research why there are records with no business name but still have an issued date, I went to investigate the Status column. I found that all those records have an expired date before 2020. Could this suggest that the business name got deleted once the licenses get expired?
@@ -162,14 +162,14 @@ To further investigate whether no business name issue is under control, I did a 
 
 From the above SPC chart, we can see that ratios of missing business names are always between the upper control line (UCL) and LCL (lower control line). Therefore, the situation is under control
 
--   **Status: Issued Date and “Pending” Status Co-Existence**
+**Status: Issued Date and “Pending” Status Co-Existence**
     
 
 To verify whether the “Pending” status was caused by license renew, I drilled through the sub data set ( the one with only “Pending” status) again, and checked the LicenceRevisionNumber column, I found that 99% of the records show zero types of change, according to LicenceRevisionNumber column. By now, the reason why Issued Date and “Pending” Status co-exist becomes a puzzle.
 
 ![](https://static.wixstatic.com/media/456b92_c5c0cd34b83c41a8a10cbfd6aae44edd~mv2.png/v1/fill/w_360,h_168,al_c,q_95/456b92_c5c0cd34b83c41a8a10cbfd6aae44edd~mv2.webp)
 
--   **Street: Empty Value**
+**Street: Empty Value**
     
 
 As per the SME’s suggestion, I did an SPC analysis of the ratio of records with no street name. The data set chosen are those records with Issued status. The period chosen is from January to Dec 2019.
@@ -192,5 +192,5 @@ He suggested adding a non-null constrain on Street column. If the users want to 
 
 Finally, my SME suggested to set up a validation rule on the PostalCode column. For example, if a user inputs a postal code that is not in “LDL DLD” pattern and Country represents Canada, the web page should pop out a warning, which might stop the user the save the input.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNTA3MDA2M119
+eyJoaXN0b3J5IjpbLTM2NjM5ODk0OF19
 -->
