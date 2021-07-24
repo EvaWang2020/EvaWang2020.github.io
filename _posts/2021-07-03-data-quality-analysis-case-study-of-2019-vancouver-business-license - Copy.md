@@ -21,7 +21,7 @@ My SME suggested adding a non-unique constraint on the primary key. He suggested
 
 ## **Initial Assessment**
 
--   **LicenceRSN: Non-Unique Primary Key**
+**LicenceRSN: Non-Unique Primary Key**
     
 
 The LicenceRSN column is described in the documentation as the primary key. Primary keys must contain unique values to maintain data integrity in a rational database. In the basic analysis, I can see that around 0.01% of primary key values (9 records) are not unique.
@@ -56,7 +56,7 @@ LicenceRSN 3336640’s two records are the same except the values in the Busines
 
 From the above, we can see that the status of the record is not the reason for having a non-unique LicenceRSN number.
 
--   **BusinessName: Missing Business Name**
+**BusinessName: Missing Business Name**
     
 
 From the basic analyses of BusinessName column, I found that 9% of records, which means 6319 rows, have no business name.
@@ -71,7 +71,7 @@ If a business had been issued a license before, but there is no business name re
 
 ![](https://static.wixstatic.com/media/456b92_cabd388ea7b843aa97860d9203649a59~mv2.png/v1/fill/w_360,h_36,al_c,q_95/456b92_cabd388ea7b843aa97860d9203649a59~mv2.webp)
 
--   **Status: Issued Date and “Pending” Status Co-Existence**
+**Status: Issued Date and “Pending” Status Co-Existence**
     
 
 The frequency analysis of the Status column indicates that 10% of recording has a “Pending” status.
@@ -191,3 +191,6 @@ He suggested checking LicenceRevisionNumber column to see why it failed to recor
 He suggested adding a non-null constrain on Street column. If the users want to save the record, they must input a street name.
 
 Finally, my SME suggested to set up a validation rule on the PostalCode column. For example, if a user inputs a postal code that is not in “LDL DLD” pattern and Country represents Canada, the web page should pop out a warning, which might stop the user the save the input.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTkyNTA3MDA2M119
+-->
