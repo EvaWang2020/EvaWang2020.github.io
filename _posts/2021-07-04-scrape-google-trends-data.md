@@ -2,7 +2,6 @@
 title: "Scrape Google Trends Data"
 published: true
 ---
-
 Google Trends is a website that how frequently a given search term is entered into Google’s search engine relative to the site’s total search volume over a given period of time. From Google Trends, you can find the search trend of certain keywords on google. You can also compare the search trends of up to five keywords. For example, below compare five keywords search trend.
 
 ![](https://static.wixstatic.com/media/456b92_a9ad12973d384973b0ac2c0dbe63c65d~mv2.png/v1/fill/w_740,h_443,al_c,q_95/456b92_a9ad12973d384973b0ac2c0dbe63c65d~mv2.webp)
@@ -56,5 +55,5 @@ Credits:
 
 [https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177](https://towardsdatascience.com/telling-stories-with-google-trends-using-pytrends-in-python-a11e5b8a177)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTkwMjYwNTk1LDE5NTkwMDE3OTVdfQ==
+eyJoaXN0b3J5IjpbLTIxMTM5Mjg4MjcsMTk1OTAwMTc5NV19
 -->
