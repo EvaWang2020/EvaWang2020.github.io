@@ -12,7 +12,7 @@ The above visualizations might not satisfy your particular needs. If you have th
 Below is the code to scrape the search trend of keywords "dress" and "pants" from Jan 1, 2020 to Jan 10 2020 in British Columbia, Canada.
 
 ```python
-<<<<<<< Updated upstream
+
 from pytrends.request import TrendReq
 import pandas as pd
 import time
@@ -30,35 +30,12 @@ timeframe='2020-01-01 2020-01-10',
 geo='CA-BC')
      data = pytrend.interest_over_time()
 if not data.empty:
-        data = data.drop(labels=['isPartial'],axis='columns')   # thhis 
+        data = data.drop(labels=['isPartial'],axis='columns')   
         dataset.append(data)
  
 result = pd.concat(dataset, axis=1)   # merge the dataset using first column as reference
 print(result) 
-=======
-    from pytrends.request import TrendReq
-    import pandas as pd
-    import time
-    pytrend \= TrendReq(hl\='en-GB', tz\=360)
 
-    keywords\=\['dress','pants'\]
-    dataset \= \[\]
-
-    for x in range(0,len(keywords)):
-         keyword \= \[keywords\[x\]\]
-         pytrend.build\_payload(
-     kw\_list\=keyword,
-     cat\=0,
-     timeframe\='2020-01-01 2020-01-10',
-     geo\='CA-BC')
-         data \= pytrend.interest\_over\_time()
-     if not data.empty:
-              data \= data.drop(labels\=\['isPartial'\],axis\='columns')   
-              dataset.append(data)
-
-    result \= pd.concat(dataset, axis\=1)   \# merge the dataset using first column as reference
-    print(result) 
->>>>>>> Stashed changes
 ```
 
 The result is:
